@@ -1,6 +1,5 @@
 const SPREADSHEET_NAME = '2026_公司旅遊';
 const SHEET_NAME = '報名資料';
-const SCRIPT_PROPERTY_KEY = 'REGISTRATION_SPREADSHEET_ID';
 
 function doPost(event) {
   try {
@@ -34,19 +33,17 @@ function initialize() {
 }
 
 function getRegistrationSheet() {
-  const properties = PropertiesService.getScriptProperties();
-  let spreadsheetId = properties.getProperty(SCRIPT_PROPERTY_KEY);
+  const files = DriveApp.getFilesByName(SPREADSHEET_NAME);
   let spreadsheet;
-
-  if (spreadsheetId) {
-    spreadsheet = SpreadsheetApp.openById(spreadsheetId);
-  } else {
-    const existing = DriveApp.getFilesByName(SPREADSHEET_NAME);
-    spreadsheet = existing.hasNext()
-      ? SpreadsheetApp.openById(existing.next().getId())
-      : SpreadsheetApp.create(SPREADSHEET_NAME);
-    spreadsheetId = spreadsheet.getId();
-    properties.setProperty(SCRIPT_PROPERTY_KEY, spreadsheetId);
+  while (files.hasNext()) {
+    const file = files.next();
+    if (file.getMimeType() === MimeType.GOOGLE_SHEETS) {
+      spreadsheet = SpreadsheetApp.openById(file.getId());
+      break;
+    }
+  }
+  if (!spreadsheet) {
+    spreadsheet = SpreadsheetApp.create(SPREADSHEET_NAME);
   }
 
   let sheet = spreadsheet.getSheetByName(SHEET_NAME);
