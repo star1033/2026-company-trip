@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f7ed">
+  <title>2026 宇宙科技員工旅遊</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #173d43;
+      --muted: #647779;
+      --paper: #f6f7ed;
+      --white: #fffefa;
+      --coral: #e9684b;
+      --yellow: #f2bf4a;
+      --green: #537c65;
+      --line: #dce5d8;
+      font-family: "Aptos", "Microsoft JhengHei", sans-serif;
+      color: var(--ink);
+      background: var(--paper);
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-width: 320px;
+      background-color: var(--paper);
+      background-image: radial-gradient(#d8e2d4 0.7px, transparent 0.7px);
+      background-size: 15px 15px;
+    }
+
+    .page { width: min(1120px, calc(100% - 48px)); margin: 0 auto; }
+    .title-row {
+      min-height: 176px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 28px 4px 22px;
+    }
+    .eyebrow {
+      margin: 0 0 10px;
+      color: var(--green);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 2px;
+    }
+    h1 {
+      max-width: 760px;
+      margin: 0;
+      font-family: "DFKai-SB", "BiauKai", "Microsoft JhengHei", sans-serif;
+      font-size: clamp(30px, 5vw, 54px);
+      line-height: 1.2;
+      font-weight: 800;
+    }
+    .year-stamp {
+      flex: 0 0 auto;
+      display: grid;
+      place-items: center;
+      width: 96px;
+      aspect-ratio: 1;
+      border: 2px solid var(--coral);
+      border-radius: 50%;
+      color: var(--coral);
+      font-family: Georgia, serif;
+      font-size: 19px;
+      font-weight: bold;
+      transform: rotate(9deg);
+    }
+    .cover-row { padding-bottom: 36px; }
+    .cover {
+      display: block;
+      width: 100%;
+      height: clamp(190px, 34vw, 380px);
+      object-fit: cover;
+      object-position: center 54%;
+      border-radius: 24px;
+      box-shadow: 0 14px 34px #28494320;
+    }
+    .details-row {
+      display: grid;
+      grid-template-columns: minmax(0, 0.92fr) minmax(340px, 1.08fr);
+      align-items: start;
+      gap: 24px;
+      padding: 0 0 64px;
+    }
+    .schedule, .registration {
+      min-width: 0;
+      border-radius: 16px;
+      background: var(--white);
+      box-shadow: 0 8px 26px #28494312;
+    }
+    .schedule { padding: 28px 30px 30px; }
+    .section-kicker {
+      margin: 0 0 5px;
+      color: var(--coral);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 1.6px;
+    }
+    h2 { margin: 0; font-size: 25px; line-height: 1.35; }
+    .schedule-list { list-style: none; margin: 23px 0 0; padding: 0; }
+    .schedule-list li {
+      display: grid;
+      grid-template-columns: 76px 1fr;
+      align-items: center;
+      gap: 14px;
+      min-height: 54px;
+      border-bottom: 1px solid var(--line);
+    }
+    .schedule-list li:last-child { border-bottom: 0; }
+    time { color: var(--green); font-family: Georgia, serif; font-size: 18px; font-weight: 700; }
+    .event { font-size: 16px; font-weight: 700; }
+    .registration { padding: 28px 30px 30px; }
+    .form-intro { margin: 8px 0 22px; color: var(--muted); font-size: 14px; }
+    form { display: grid; grid-template-columns: 1fr 1fr; gap: 15px 14px; }
+    .field { min-width: 0; }
+    .field.full { grid-column: 1 / -1; }
+    label { display: block; margin-bottom: 6px; font-size: 13px; font-weight: 750; }
+    .required { color: var(--coral); }
+    input {
+      width: 100%;
+      min-height: 44px;
+      padding: 10px 12px;
+      border: 1px solid #cbd9d0;
+      border-radius: 7px;
+      outline: none;
+      background: #fff;
+      color: var(--ink);
+      font: inherit;
+    }
+    input:focus { border-color: var(--green); box-shadow: 0 0 0 3px #537c6520; }
+    input::placeholder { color: #97a6a0; }
+    .submit-row { grid-column: 1 / -1; display: flex; align-items: center; gap: 14px; margin-top: 5px; }
+    button {
+      min-height: 48px;
+      padding: 0 24px;
+      border: 0;
+      border-radius: 7px;
+      background: var(--coral);
+      color: #fff;
+      font: inherit;
+      font-weight: 800;
+      cursor: pointer;
+      transition: background 160ms ease, transform 160ms ease;
+    }
+    button:hover { background: #cc5238; transform: translateY(-1px); }
+    button:disabled { cursor: wait; opacity: 0.7; transform: none; }
+    #form-status { margin: 0; color: var(--green); font-size: 13px; }
+    footer { padding: 0 0 24px; color: var(--muted); text-align: center; font-size: 12px; }
+
+    @media (max-width: 760px) {
+      .page { width: min(100% - 32px, 560px); }
+      .title-row { min-height: 142px; }
+      .year-stamp { width: 70px; font-size: 15px; }
+      .cover-row { padding-bottom: 24px; }
+      .cover { height: 230px; border-radius: 16px; }
+      .details-row { grid-template-columns: 1fr; gap: 16px; padding-bottom: 40px; }
+      .schedule, .registration { padding: 23px 21px; }
+    }
+    @media (max-width: 420px) {
+      .page { width: calc(100% - 24px); }
+      .title-row { gap: 10px; }
+      .year-stamp { width: 58px; font-size: 13px; }
+      form { grid-template-columns: 1fr; }
+      .field.full, .submit-row { grid-column: auto; }
+      .submit-row { align-items: flex-start; flex-direction: column; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: 0.01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="title-row">
+      <div>
+        <p class="eyebrow">COSMOS TECHNOLOGY · COMPANY TRIP</p>
+        <h1>2026 宇宙科技員工旅遊</h1>
+      </div>
+      <div class="year-stamp" aria-label="2026 年">2026</div>
+    </header>
+
+    <section class="cover-row" aria-label="活動圖片">
+      <img class="cover" src="COVER.png" alt="活動主視覺橫幅">
+    </section>
+
+    <section class="details-row" aria-label="活動內容與報名表單">
+      <section class="schedule" aria-labelledby="schedule-title">
+        <p class="section-kicker">THE DAY, TOGETHER</p>
+        <h2 id="schedule-title">活動流程</h2>
+        <ul class="schedule-list">
+          <li><time datetime="08:00">08:00</time><span class="event">報到</span></li>
+          <li><time datetime="09:00">09:00</time><span class="event">場次一</span></li>
+          <li><time datetime="10:00">10:00</time><span class="event">Break time</span></li>
+          <li><time datetime="10:30">10:30</time><span class="event">場次二</span></li>
+          <li><time datetime="11:30">11:30</time><span class="event">Q&amp;A</span></li>
+          <li><time datetime="12:00">12:00</time><span class="event">活動休息</span></li>
+        </ul>
+      </section>
+
+      <section class="registration" aria-labelledby="registration-title">
+        <p class="section-kicker">SAVE YOUR SPOT</p>
+        <h2 id="registration-title">立即報名</h2>
+        <p class="form-intro">填寫資料，和我們一起出發。</p>
+        <form id="registration-form">
+          <div class="field">
+            <label for="name">姓名 <span class="required">*</span></label>
+            <input id="name" name="name" autocomplete="name" placeholder="請輸入姓名" required>
+          </div>
+          <div class="field">
+            <label for="email">Email <span class="required">*</span></label>
+            <input id="email" name="email" type="email" autocomplete="email" placeholder="name@example.com" required>
+          </div>
+          <div class="field">
+            <label for="unit">單位</label>
+            <input id="unit" name="unit" autocomplete="organization" placeholder="請輸入單位">
+          </div>
+          <div class="field">
+            <label for="phone">電話 <span class="required">*</span></label>
+            <input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="請輸入聯絡電話" required>
+          </div>
+          <div class="field full">
+            <label for="title">職稱</label>
+            <input id="title" name="title" autocomplete="organization-title" placeholder="請輸入職稱">
+          </div>
+          <div class="submit-row">
+            <button type="submit">送出報名</button>
+            <p id="form-status" role="status" aria-live="polite"></p>
+          </div>
+        </form>
+      </section>
+    </section>
+    <footer>宇宙科技 · 2026 員工旅遊</footer>
+  </main>
+  <script>
+    const SCRIPT_URL = "APPS_SCRIPT_WEB_APP_URL";
+    const form = document.querySelector("#registration-form");
+    const submitButton = form.querySelector("button[type=submit]");
+    const statusMessage = document.querySelector("#form-status");
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      if (!form.reportValidity()) return;
+      if (SCRIPT_URL === "APPS_SCRIPT_WEB_APP_URL") {
+        statusMessage.textContent = "報名服務尚未完成部署，請稍後再試。";
+        return;
+      }
+
+      submitButton.disabled = true;
+      statusMessage.textContent = "資料送出中…";
+      try {
+        const fields = Object.fromEntries(new FormData(form).entries());
+        await fetch(SCRIPT_URL, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8" },
+          body: new URLSearchParams(fields)
+        });
+        statusMessage.textContent = "報名資料已送出，謝謝！";
+        form.reset();
+      } catch {
+        statusMessage.textContent = "送出失敗，請確認網路後再試一次。";
+      } finally {
+        submitButton.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>
